@@ -1,0 +1,38 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to left, #808000, #98fb98);
+}
+
+.calculator-grid {
+    min-height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(4, 80px);
+    grid-template-rows: repeat(6, 80px);
+}
+
+.calculator-grid > button {
+    background-color: white;
+}
+
+.calculator-grid > button:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.output {
+    background-color: white;
+    padding: 10px;
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: flex-end;
+}
+
+.double-column {
+    grid-column: span 2;
+}
