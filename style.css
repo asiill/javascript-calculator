@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -5,11 +7,12 @@
 body {
     margin: 0;
     padding: 0;
-    background: #add8e6;
+    background: #d7eff7;
 }
 
 .calculator-grid {
     min-height: 100vh;
+
     display: grid;
     grid-template-columns: repeat(4, 80px);
     grid-template-rows: repeat(6, 80px);
@@ -17,23 +20,47 @@ body {
     align-items: center;
 }
 
-.calculator-grid > button {
-    background-color: #f5f5f5;
-}
-
-.calculator-grid > button:hover {
-    background-color: #ffffff80;
-}
-
 .output {
-    background-color: #f5f5f5;
-    padding: 10px;
     grid-column: 1 / -1;
-
+    padding: 10px;
+    font-size: 16px;
+    color: #000000;
+    background-color: #f5f5f5;
+    
     display: flex;
     align-items: flex-end;
 }
 
+button {
+    font-size: 16px;
+    color: #f5f5f5;
+    background-color: rgb(40, 40, 40);
+    border-radius: 5px;
+    transition: 0.1s;
+}
+
+button:hover {
+    opacity: 0.7;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
 .double-column {
     grid-column: span 2;
+}
+
+#del, #clear, #equals {
+    color: #000000;
+}
+
+#del {
+    background-color: #f08080;
+}
+
+#clear {
+    background-color: #90ee90;
+}
+
+#equals {
+    background-color: rgb(40, 86, 102);
 }
