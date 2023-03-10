@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
-*, *::before, *::after {
+* {
     box-sizing: border-box;
 }
 
@@ -14,14 +14,17 @@ body {
     min-height: 100vh;
 
     display: grid;
-    grid-template-columns: repeat(4, 80px);
-    grid-template-rows: repeat(6, 80px);
+    grid-template-columns: repeat(4, 70px);
+    grid-template-rows: repeat(6, 70px);
+    gap: 2px;
+    align-content: center;
     justify-content: center;
-    align-items: center;
+    
 }
 
 .output {
     grid-column: 1 / -1;
+    
     padding: 10px;
     font-size: 16px;
     color: #000000;
