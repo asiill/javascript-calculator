@@ -5,30 +5,31 @@
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(to left, #808000, #98fb98);
+    background: #add8e6;
 }
 
 .calculator-grid {
     min-height: 100vh;
     display: grid;
-    justify-content: center;
-    align-items: center;
     grid-template-columns: repeat(4, 80px);
     grid-template-rows: repeat(6, 80px);
+    justify-content: center;
+    align-items: center;
 }
 
 .calculator-grid > button {
-    background-color: white;
+    background-color: #f5f5f5;
 }
 
 .calculator-grid > button:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #ffffff80;
 }
 
 .output {
-    background-color: white;
+    background-color: #f5f5f5;
     padding: 10px;
     grid-column: 1 / -1;
+
     display: flex;
     align-items: flex-end;
 }
