@@ -3,73 +3,59 @@
 const del = document.querySelector("#del");
 const clear = document.querySelector("#clear");
 const equals = document.querySelector("#equals");
-const decimal = document.querySelector("#decimal");
 const numbers = document.querySelectorAll(".number");
-const operators = document.querySelectorAll(".operator");
-let output = document.querySelector(".output");
+const operations = document.querySelectorAll(".operation");
 
-numbers.forEach(n => n.addEventListener("click", handleNumber));
-operators.forEach(op => op.addEventListener("click", handleOperator));
-decimal.addEventListener("click", handleDecimal);
-
-del.addEventListener("click", deleteItem);
-clear.addEventListener("click", clearDisplay);
-equals.addEventListener("click", evaluate);
+let previousOperand = document.querySelector(".previous-operand");
+let currentOperand = document.querySelector(".current-operand");
 
 function handleNumber() {
-    output.textContent += this.textContent;
-}
-
-function handleOperator() {
-    // Retrieve the final character from the current display
-    let currentItem = output.textContent.charAt(output.textContent.length - 1);
-    // Prevent the addition of multiple consecutive operators or operators following an empty string
-    if (currentItem === "" | currentItem === "+" | currentItem === "-" | currentItem === "x" | currentItem === "÷") {
+    if (this.textContent === "." && currentOperand.textContent.includes(".")) {
         return;
     }
-    // If the final character is a decimal, include a 0 before the operator
-    else if (currentItem === ".") {
-        output.textContent += "0" + this.textContent;
-    }
-    else {
-        output.textContent += this.textContent;
-    }
+    currentOperand.textContent += this.textContent;
 }
 
-function handleDecimal() {
-    // Retrieve the final character from the current display
-    let currentItem = output.textContent.charAt(output.textContent.length - 1);
-    // If the final character is an operator or is an empty string, include a 0 before the decimal
-    if (currentItem === "" | currentItem === "+" | currentItem === "-" | currentItem === "x" | currentItem === "÷"){
-        output.textContent += "0.";
-    }
-    // Prevent the addition of multiple consecutive decimals
-    else if (currentItem === ".") {
+function handleOperation() {
+    if (currentOperand.textContent === "") {
         return;
     }
-    else {
-        // Prevent the addition of multiple decimals within the same operand
-        let opr = output.textContent.replaceAll("-", "+").replaceAll("x", "+").replaceAll("÷", "+").split("+");
-        let oprEnd = opr.pop();
-        if (oprEnd.includes(".")) {
-            return;
-        }
-        else {
-            output.textContent += ".";
-        }
+    if (previousOperand.textContent !== "") {
+        evaluate();
     }
+    previousOperand.textContent = (currentOperand.textContent + this.textContent);
+    currentOperand.textContent = "";   
 }
 
 function deleteItem() {
-    let currentOutput = output.textContent;
-    output.textContent = currentOutput.slice(0, currentOutput.length - 1);
+    let current = currentOperand.textContent;
+    currentOperand.textContent = current.slice(0, current.length - 1);
 }
 
 function clearDisplay() {
-    output.textContent = "";
+    currentOperand.textContent = "";
+    previousOperand.textContent = "";
 }
 
-function evaluate(){
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    if (b === 0) {
+        return "Error, cannot divide by 0";
+    }
+    else {
+        return a / b;
+    }
 }
 
 function operate(a, b, operator) {
@@ -92,23 +78,26 @@ function operate(a, b, operator) {
     return result;
 }
 
-function add(a, b) {
-    return a + b;
-}
+function evaluate(){
+    let calculation;
+    let previous = previousOperand.textContent;
+    let operation = previous.charAt(previous.length - 1);
 
-function subtract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    if (b === 0) {
-        return "ERROR";
+    let prev = parseFloat(previous.slice(0, previous.length - 1));
+    let current = parseFloat(currentOperand.textContent);
+    
+    if (isNaN(prev) || isNaN(current)) {
+        return;
     }
-    else {
-        return a / b;
-    }
+
+    calculation = operate(prev, current, operation);
+    currentOperand.textContent = calculation;
+    previousOperand.textContent = "";
 }
+
+numbers.forEach(n => n.addEventListener("click", handleNumber));
+operations.forEach(op => op.addEventListener("click", handleOperation));
+
+del.addEventListener("click", deleteItem);
+clear.addEventListener("click", clearDisplay);
+equals.addEventListener("click", evaluate);
