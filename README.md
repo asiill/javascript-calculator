@@ -5,4 +5,4 @@ An on-screen calculator created using Javascript.
 https://asiill.github.io/javascript-calculator/
 
 ## Screenshot
-![js-calculator-screenshot](https://github.com/asiill/javascript-calculator/assets/9745019/06de6cf9-0352-4214-a455-2dd937ba0bf6)
+![javascriptcalculator](https://github.com/asiill/javascript-calculator/assets/9745019/7e7d29f4-755e-426f-8a48-65d06eb5dd11)
